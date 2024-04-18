@@ -22,18 +22,20 @@ N="\e[0m"
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo "$2.. installation of $2 is $R FAILED $N"
+        echo -e "$2.. installation of $2 is $R FAILED $N"
+        exit 1
     else
-        echo "$2.. installation of $2 is $G SUCCESS $N"
+        echo -e "$2.. installation of $2 is $G SUCCESS $N"
     fi
 }
 
 # Checking that uer is sudo user or not.
 if [ $USERID -ne 0 ]
 then
-    echo "This current user $USER is not a sudo user. Please get the sudo access first or login with sudo user before installing packages."
+    echo -e "This current user $B '$USER' $N is not a sudo user. Please get the sudo access first or login with sudo user before installing packages."
+    exit 1
 else
-    echo "this current user $USER is has the sudo access. You can proceed to install the packages."
+    echo -e "This current user $B '$USER' $N has the sudo access. You can proceed to install the packages."
 fi
 
 # Installing the mysql-server package.
@@ -42,7 +44,7 @@ VALIDATE $? "Installing MySQL Server"
 
 # Enabling the MySQL Server service.
 systemctl enable mysqld &>> $LOGFILE
-VALIDATE $? "Enabling the mysql service"
+VALIDATE $? "Enabling mysql service"
 
 # Starting the mysql service
 systemctl start mysqld &>> $LOGFILE
