@@ -57,7 +57,7 @@ VALIDATE $? "Starting the mysql service"
 mysql -h IPADDRESSOFSQLSERVER -uroot -pmySQLPassword -e "show databases;" &>> $LOGFILE
 if [ $? -eq 0 ]
 then
-    mysql_secure_installation --set-root-pass mySQLPassword
+    mysql_secure_installation --set-root-pass $mySQLPassword
     VALIDATE $? "Setting the password for root user in MySQL server"
 else
     echo -e "MySQL root password is already set. $Y SKIPPING $N"

@@ -100,7 +100,9 @@ dnf install mysql -y &>> $LOGFILEPATH
 VALIDATION $? "Installing mysql client"
 
 # Loading the schema into the mysql.
-mysql -h 172.31.91.223 -uroot -pmySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
+mysql -h 172.31.91.223 -uroot -p$mySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
 VALIDATION $? "Loading the SQL schema"
 
-echo "CHECK THE installation is fine by checking the port number"
+# Restarting backend.
+systemctl restart backend &>> $LOGFILEPATH
+VALIDATION $? "Restarting the backend service"
