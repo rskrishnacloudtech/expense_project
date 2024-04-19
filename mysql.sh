@@ -10,6 +10,8 @@ USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 FILENAME=$(echo $0 | cut -d "." -f1)
 LOGFILE=/tmp/$TIMESTAMP-$FILENAME.log
+echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+read -s mySQLPassword
 
 # Creating a color codes.
 R="\e[31m"
@@ -50,7 +52,13 @@ VALIDATE $? "Enabling mysql service"
 systemctl start mysqld &>> $LOGFILE
 VALIDATE $? "Starting the mysql service"
 
-# Setting the password to the root user of mysql server.
-mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE $? "Setting the password for root user in MySQL server"
-
+# Setting the password to the root user of mysql server. If the password is already set it will set again. So we need to check its first and 
+# then we have to set the password if its not set already.
+mysql -h IPADDRESSOFSQLSERVER -uroot -pmySQLPassword -e "show databases;" &>> $LOGFILE
+if [ $? -eq 0]
+then
+    mysql_secure_installation --set-root-pass mySQLPassword
+    VALIDATE $? "Setting the password for root user in MySQL server"
+else
+    echo -e "MySQL root password is already set. $Y SKIPPING $N"
+fi
