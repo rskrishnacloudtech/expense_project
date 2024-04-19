@@ -80,7 +80,7 @@ npm install &>> $LOGFILEPATH
 VALIDATION $? "Installing dependencies"
 
 # Copying the backend.service file to etc/systemd/system.
-cp /home/ec2-user/expense-shell/backend.service etc/systemd/system/backend.service &>> $LOGFILEPATH
+cp /home/ec2-user/expense_project/expense_project/backend.service etc/systemd/system/backend.service &>> $LOGFILEPATH
 VALIDATION $? "Copying the backend.service file to system folder."
 
 # Reload the daemon serice.
@@ -100,7 +100,7 @@ dnf install mysql -y &>> $LOGFILEPATH
 VALIDATION $? "Installing mysql client"
 
 # Loading the schema into the mysql.
-mysql -h DBIPADDRESS -uroot -pmySQLPassword < /app/schema/backend.mysql &>> $LOGFILEPATH
+mysql -h 172.31.91.223 -uroot -pmySQLPassword < /app/schema/backend.mysql &>> $LOGFILEPATH
 VALIDATION $? "Loading the SQL schema"
 
 echo "CHECK THE installation is fine by checking the port number"
