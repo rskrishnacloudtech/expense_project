@@ -80,7 +80,7 @@ npm install &>> $LOGFILEPATH
 VALIDATION $? "Installing dependencies"
 
 # Copying the backend.service file to etc/systemd/system.
-cp /home/ec2-user/expense_project/expense_project/backend.service etc/systemd/system/backend.service &>> $LOGFILEPATH
+cp /home/ec2-user/expense_project/expense_project/backend.service /etc/systemd/system/backend.service &>> $LOGFILEPATH
 VALIDATION $? "Copying the backend.service file to system folder."
 
 # Reload the daemon serice.
