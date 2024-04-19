@@ -46,7 +46,7 @@ dnf module disable nodejs -y &>> $LOGFILEPATH
 VALIDATION $? "Disabling the nodejs older versions"
 
 # Enabling the latest version of nodejs application.
-dng module enable nodejs:20 -y &>> $LOGFILEPATH
+dnf module enable nodejs:20 -y &>> $LOGFILEPATH
 
 # Installing the node js application
 dnf install nodejs -y &>> $LOGFILEPATH
@@ -56,7 +56,7 @@ VALIDATION $? "Installing the nodejs latest version"
 id expense &>> $LOGFILEPATH
 if [ $? -eq 0 ]
 then
-    echo "User expense is already exist in the system... $Y SKIPPING $N"    
+    echo -e "User expense is already exist in the system... $Y SKIPPING $N"    
 else
     useradd expense &>> $LOGFILEPATH
     VALIDATION $? "Creating a user"
@@ -72,7 +72,7 @@ VALIDATION $? "Downloading the backend application code"
 # Unzipping the code file.
 cd /app
 rm -rf /app/*
-unzip backend.zip &>> $LOGFILEPATH
+unzip /tmp/backend.zip &>> $LOGFILEPATH
 VALIDATION $? "Unzipping the backend application code"
 
 # Installing the dependencies.
