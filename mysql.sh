@@ -55,7 +55,7 @@ VALIDATE $? "Starting the mysql service"
 # Setting the password to the root user of mysql server. If the password is already set it will set again. So we need to check its first and 
 # then we have to set the password if its not set already.
 mysql -h IPADDRESSOFSQLSERVER -uroot -pmySQLPassword -e "show databases;" &>> $LOGFILE
-if [ $? -eq 0]
+if [ $? -eq 0 ]
 then
     mysql_secure_installation --set-root-pass mySQLPassword
     VALIDATE $? "Setting the password for root user in MySQL server"
