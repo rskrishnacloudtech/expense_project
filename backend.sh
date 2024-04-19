@@ -50,7 +50,7 @@ dng module enable nodejs:20 -y &>> $LOGFILEPATH
 
 # Installing the node js application
 dnf install nodejs -y &>> $LOGFILEPATH
-VALIDATE $? "Installing the nodejs latest version"
+VALIDATION $? "Installing the nodejs latest version"
 
 # Creating the expense user only if its not already created to use in this project.
 id expense &>> $LOGFILEPATH
@@ -59,7 +59,7 @@ then
     echo "User expense is already exist in the system... $Y SKIPPING $N"    
 else
     useradd expense &>> $LOGFILEPATH
-    VALIDATE $? "Creating a user"
+    VALIDATION $? "Creating a user"
 fi
 
 # Create a directory only if its not exists to store the application code.
@@ -67,40 +67,40 @@ mkdir -p /app &>> $LOGFILEPATH
 
 # Download the application code from the repo.
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>> $LOGFILEPATH
-VALIDATE $? "Downloading the backend application code"
+VALIDATION $? "Downloading the backend application code"
 
 # Unzipping the code file.
 cd /app
 rm -rf /app/*
 unzip backend.zip &>> $LOGFILEPATH
-VALIDATE $? "Unzipping the backend application code"
+VALIDATION $? "Unzipping the backend application code"
 
 # Installing the dependencies.
 npm install &>> $LOGFILEPATH
-VALIDATE $? "Installing dependencies"
+VALIDATION $? "Installing dependencies"
 
 # Copying the backend.service file to etc/systemd/system.
 cp /home/ec2-user/expense-shell/backend.service etc/systemd/system/backend.service &>> $LOGFILEPATH
-VALIDATE $? "Copying the backend.service file to system folder."
+VALIDATION $? "Copying the backend.service file to system folder."
 
 # Reload the daemon serice.
 systemctl daemon-reload &>> $LOGFILEPATH
-VALIDATE $? "Relading the daemon service"
+VALIDATION $? "Relading the daemon service"
 
 # Starting the backend service.
 systemctl start backend &>> $LOGFILEPATH
-VALIDATE $? "Staring the Backend service"
+VALIDATION $? "Staring the Backend service"
 
 # Enabling the backend service.
 systemctl enable backend &>> $LOGFILEPATH
-VALIDATE $? "Enabling the backend service"
+VALIDATION $? "Enabling the backend service"
 
 # Installing the mysql client
 dnf install mysql -y &>> $LOGFILEPATH
-VALIDATE $? "Installing mysql client"
+VALIDATION $? "Installing mysql client"
 
 # Loading the schema into the mysql.
 mysql -h DBIPADDRESS -uroot -pmySQLPassword < /app/schema/backend.mysql &>> $LOGFILEPATH
-VALIDATE $? "Loading the SQL schema"
+VALIDATION $? "Loading the SQL schema"
 
 echo "CHECK THE installation is fine by checking the port number"
