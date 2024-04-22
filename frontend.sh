@@ -55,7 +55,7 @@ systemctl start nginx &>> $LOGFILEPATH
 VALIDATION $? "Starting nginx service"
 
 # Removing all the content inside.
-rm -rf /user/share/nginx/html/* &>> $LOGFILEPATH
+rm -rf /usr/share/nginx/html/* &>> $LOGFILEPATH
 VALIDATION $? "Removing the default content in the nginx server"
 
 # Download the application files from the shared repo.
