@@ -104,7 +104,7 @@ dnf install mysql -y &>> $LOGFILEPATH
 VALIDATION $? "Installing mysql client"
 
 # Loading the schema into the mysql.
-mysql -h DBServerIP -uroot -p$mySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
+mysql -h $DBServerIP -uroot -p$mySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
 VALIDATION $? "Loading the SQL schema"
 
 # Restarting backend.
