@@ -14,6 +14,9 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 FILENAME=$(echo $0 | cut -d "." -f1)
 LOGFILEPATH=/tmp/$FILENAME-$TIMESTAMP.log
 
+mySQLPassword=ExpenseApp@1
+DBServerIP=172.31.80.220
+
 # Set the color codes.
 R="\e[31m"
 G="\e[32m"
@@ -100,7 +103,7 @@ dnf install mysql -y &>> $LOGFILEPATH
 VALIDATION $? "Installing mysql client"
 
 # Loading the schema into the mysql.
-mysql -h 172.31.91.223 -uroot -p$mySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
+mysql -h DBServerIP -uroot -p$mySQLPassword < /app/schema/backend.sql &>> $LOGFILEPATH
 VALIDATION $? "Loading the SQL schema"
 
 # Restarting backend.

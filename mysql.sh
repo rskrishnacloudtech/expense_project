@@ -10,8 +10,10 @@ USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 FILENAME=$(echo $0 | cut -d "." -f1)
 LOGFILE=/tmp/$TIMESTAMP-$FILENAME.log
-echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
-read -s mySQLPassword
+#echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+#read -s mySQLPassword
+mySQLPassword=ExpenseApp@1
+DBServerIP=172.31.80.220
 
 # Creating a color codes.
 R="\e[31m"
@@ -54,7 +56,7 @@ VALIDATE $? "Starting the mysql service"
 
 # Setting the password to the root user of mysql server. If the password is already set it will set again. So we need to check its first and 
 # then we have to set the password if its not set already.
-mysql -h IPADDRESSOFSQLSERVER -uroot -p$mySQLPassword -e "show databases;" &>> $LOGFILE
+mysql -h DBServerIP -uroot -p$mySQLPassword -e "show databases;" &>> $LOGFILE
 if [ $? -eq 0 ]
 then
     mysql_secure_installation --set-root-pass $mySQLPassword
