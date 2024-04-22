@@ -10,9 +10,9 @@ USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 FILENAME=$(echo $0 | cut -d "." -f1)
 LOGFILE=/tmp/$TIMESTAMP-$FILENAME.log
-#echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
-#read -s mySQLPassword
-mySQLPassword=ExpenseApp@1
+echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+read -s mySQLPassword
+#mySQLPassword=ExpenseApp@1
 DBServerIP=172.31.80.220
 
 # Creating a color codes.

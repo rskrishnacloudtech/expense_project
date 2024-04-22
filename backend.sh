@@ -6,17 +6,17 @@ USER=$(whoami)
 # Get the user id of the logged in user.
 USERID=$(id -u)
 
-#echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
-#read -s mySQLPassword
-mySQLPassword=ExpenseApp@1
+echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+read -s mySQLPassword
+#mySQLPassword=ExpenseApp@1
+DBServerIP=172.31.80.220
 
 # Create a log file name format.
 TIMESTAMP=$(date +%F-%H-%M-%S)
 FILENAME=$(echo $0 | cut -d "." -f1)
 LOGFILEPATH=/tmp/$FILENAME-$TIMESTAMP.log
 
-mySQLPassword=ExpenseApp@1
-DBServerIP=172.31.80.220
+
 
 # Set the color codes.
 R="\e[31m"

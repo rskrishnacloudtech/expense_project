@@ -6,9 +6,9 @@ USER=$(whoami)
 # Get the user id of the logged in user.
 USERID=$(id -u)
 
-#echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
-#read -s mySQLPassword
-mySQLPassword=ExpenseApp@1
+echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+read -s mySQLPassword
+#mySQLPassword=ExpenseApp@1
 
 # Create a log file name format.
 TIMESTAMP=$(date +%F-%H-%M-%S)
