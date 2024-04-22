@@ -67,7 +67,7 @@ cd /usr/share/nginx/html/
 unzip /tmp/frontend.zip &>> $LOGFILEPATH
 VALIDATION $? "Extracting the frontend files"
 
-# Copy expense.config file to /etc/nginx/default.d/expense.conf.
+# Copy expense.conf file to /etc/nginx/default.d/expense.conf.
 cp /home/ec2-user/expenseproject/expense_project/expense.conf /etc/nginx/default.d/expense.conf &>> $LOGFILEPATH
 VALIDATION $? "Copying the expense.config file"
 
