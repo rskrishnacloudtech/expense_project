@@ -6,8 +6,9 @@ USER=$(whoami)
 # Get the user id of the logged in user.
 USERID=$(id -u)
 
-echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
-read -s mySQLPassword
+#echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
+#read -s mySQLPassword
+mySQLPassword=ExpenseApp@1
 
 # Create a log file name format.
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -43,33 +44,33 @@ VALIDATION(){
 
 # Installing nginx application.
 dnf install nginx -y &>> $LOGFILEPATH
-VALIDATE $? "Installing nginx"
+VALIDATION $? "Installing nginx"
 
 # Enabling nginx service.
 systemctl enable nginx &>> $LOGFILEPATH
-VALIDATE $? "Enabling nginx service"
+VALIDATION $? "Enabling nginx service"
 
 # Starting nginx service.
 systemctl start nginx &>> $LOGFILEPATH
-VALIDATE $? "Starting nginx service"
+VALIDATION $? "Starting nginx service"
 
 # Removing all the content inside.
 rm -rf /user/share/nginx/html/* &>> $LOGFILEPATH
-VALIDATE $? "Removing the default content in the nginx server"
+VALIDATION $? "Removing the default content in the nginx server"
 
 # Download the application files from the shared repo.
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>> $LOGFILEPATH
-VALIDATE $? "Downloading the application files"
+VALIDATION $? "Downloading the application files"
 
 # Extract the content.
 cd /user/share/nginx/html/
 unzip /tmp/frontend.zip &>> $LOGFILEPATH
-VALIDATE $? "Extracting the frontend files"
+VALIDATION $? "Extracting the frontend files"
 
 # Copy expense.config file to /etc/nginx/default.d/expense.conf.
-cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>> $LOGFILEPATH
-VALIDATE $? "Copying the expense.config file"
+cp /home/ec2-user/expenseproject/expense_project/expense.conf /etc/nginx/default.d/expense.conf &>> $LOGFILEPATH
+VALIDATION $? "Copying the expense.config file"
 
 # Restart the nginx service
 systemctl restart nginx &>> $LOGFILEPATH
-VALIDATE $? "Restaring the nginx"
+VALIDATION $? "Restaring the nginx"
