@@ -9,7 +9,7 @@ USERID=$(id -u)
 echo "Please enter the DB password.. "          # ExpenseApp@1 is the password. 
 read -s mySQLPassword
 #mySQLPassword=ExpenseApp@1
-DBServerIP=172.31.80.220
+DBServerIP=172.31.80.220                        # hostname -I | awk '{print $1}' to get the private IP address of the server.
 
 # Create a log file name format.
 TIMESTAMP=$(date +%F-%H-%M-%S)

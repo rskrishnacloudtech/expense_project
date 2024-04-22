@@ -3,7 +3,7 @@ Description = Backend Service
 
 [Service]
 User=expense
-Environment=DB_HOST="172.31.80.220"
+Environment=DB_HOST="172.31.80.220" # Here after http:// we ahve to give the DB server private IP address or domain name if exists.
 ExecStart=/bin/node /app/index.js
 SyslogIdentifier=backend
 
