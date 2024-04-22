@@ -71,6 +71,6 @@ VALIDATION $? "Extracting the frontend files"
 cp /home/ec2-user/expenseproject/expense_project/expense.conf /etc/nginx/default.d/expense.conf &>> $LOGFILEPATH
 VALIDATION $? "Copying the expense.config file"
 
-# Restart the nginx service
+# Restart the nginx service     
 systemctl restart nginx &>> $LOGFILEPATH
 VALIDATION $? "Restaring the nginx"
